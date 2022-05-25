@@ -1,11 +1,13 @@
 <script>
+	import Loader from './Loader.svelte';
 </script>
 
 <main>
 	<h1 class="title">
 		<span class="title-first">Poké</span><span class="title-second">Height</span>
+		<Loader />
 	</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+
 </main>
 
 <style>
@@ -17,7 +19,7 @@
 	}
 
 	h1 {
-		color: #ff3e00;
+		color: #D2042D;
 		font-size: 4em;
 		font-weight: 100;
 	}
