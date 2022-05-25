@@ -1,11 +1,12 @@
 <script>
 	import Loader from './Loader.svelte';
+	import Form from './Form.svelte';
 </script>
 
 <main>
 	<h1 class="title">
 		<span class="title-first">Poké</span><span class="title-second">Height</span>
-		<Loader />
+		<Form />
 	</h1>
 
 </main>
