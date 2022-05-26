@@ -1,13 +1,33 @@
 <script>
   import Loader from './Loader.svelte';
   import Form from './Form.svelte';
+	import * as PokemonService from './pokemon-service';
+
+	// get pokemon on load and set loading to false when retrieved
+	let pokemon = null;
+	let loading = true;
+	let error = false;
+
+	PokemonService.getAllSupportedPokemon()
+		.then((res) => (pokemon = res))
+		.catch((err) => {
+			console.error(err);
+			error = true;
+		})
+		.finally(() => (loading = false));
 </script>
 
 <main>
   <h1 class="title">
     <span class="title-first">Poké</span><span class="title-second">Height</span>
-    <Form />
   </h1>
+	{#if loading}
+			<Loader />
+		{:else if error}
+			<span>An error occurred! Try reloading.</span>
+		{:else}
+			<Form />
+		{/if}
 </main>
 
 <style>
