@@ -1,13 +1,6 @@
 <script>
   import Loader from './Loader.svelte';
   import Form from './Form.svelte';
-  import * as PokemonService from './pokemon-service';
-
-	let allPokemon = null;
-
-  PokemonService.getAllSupportedPokemon()
-    .then((res) => { allPokemon = res; console.log(res) })
-    .catch((err) => console.error(err));
 </script>
 
 <main>
