@@ -1,6 +1,6 @@
 <script>
-  import Loader from './Loader.svelte';
-  import Form from './Form.svelte';
+  import Loader from './components/Loader.svelte';
+  import Form from './components/Form.svelte';
 	import * as PokemonService from './pokemon-service';
 
 	// get pokemon on load and set loading to false when retrieved

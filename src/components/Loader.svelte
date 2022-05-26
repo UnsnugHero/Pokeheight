@@ -1,6 +1,5 @@
 <div class="container">
 	<div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-	<!-- <span class="loading-text">Loading...</span> -->
 </div>
 
 <style>
