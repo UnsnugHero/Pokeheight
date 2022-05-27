@@ -15,6 +15,10 @@
 			error = true;
 		})
 		.finally(() => (loading = false));
+
+	const onFormSubmit = function() {
+		
+	}
 </script>
 
 <main>

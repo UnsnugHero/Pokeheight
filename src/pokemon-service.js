@@ -22,12 +22,33 @@ export function getAllSupportedPokemon() {
       return results.map((pokemon, idx) => {
         const idxOffset = idx + 1;
         const generation = getGeneration(idxOffset);
+        const getIdxText = convertIndexToText(idxOffset);
+        const pokemonName =
+          pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
         return {
           ...pokemon,
           generation,
+          id: idxOffset,
+          text: `${getIdxText}. ${pokemonName}`,
         };
       });
     });
+}
+
+/**
+ * Converts a Pokemon's pokedex index to a three digit string value prepended with zeros when needed
+ * @param {number} index
+ */
+function convertIndexToText(index) {
+  let baseIdx = index.toString();
+  let totalNumZeros = 3 - baseIdx.length;
+
+  while (totalNumZeros > 0) {
+    baseIdx = baseIdx.replace(/^/, '0');
+    totalNumZeros--;
+  }
+
+  return baseIdx;
 }
 
 /**
@@ -65,23 +86,8 @@ function getGeneration(pokeIndex) {
 }
 
 /**
- * Gets all Pokemon in provided range (inclusive) by their
- * Pokedex index
- * @param {number} lowerIndex
- * @param {number} upperIndex
- * @returns {Promise<Pokemon[]>} Promise for list of Pokemon
- */
-export function getPokemonInRange(lowerIndex, upperIndex) {}
-
-/**
  * Gets a single Pokemon by its id (its Pokedex index)
  * @param {number} id
  * @returns {Promise<Pokemon>}
  */
 export function getPokemonById(id) {}
-
-/**
- * Gets a single Pokemon by its name
- * @param {string} name
- */
-export function getPokemonByName(name) {}

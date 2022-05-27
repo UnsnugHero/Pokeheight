@@ -12,13 +12,18 @@
 
 	let useRandomPokemon = true;
 	let selectedGeneration = 0;
-	let selectedPokemon = null;
+	let selectedPokemonId = null;
 	let currPokemonPool = allPokemon;
 
-	$: formState = {useRandomPokemon, selectedGeneration, selectedPokemon}
+	$: formState = {useRandomPokemon, selectedGeneration, selectedPokemonId: selectedPokemonId}
 
 	const clickCheckboxHandler = function() {
+		// if Random Pokemon toggle is unselected, then the selectedPokemon needs to be cleared (and set if its set)
 		useRandomPokemon = !useRandomPokemon;
+
+		if(useRandomPokemon) {
+			selectedPokemonId = null;
+		} 
 	}
 
 	const selectGenerationHandler = function({ detail }) {
@@ -31,12 +36,12 @@
 				currPokemonPool = allPokemon.filter(pkmn => pkmn.generation === detail);
 			}
 		}
-		console.log(currPokemonPool);
 	}
+
+	const selectPokemonHandler = ({ detail }) => selectedPokemonId = detail
 
 	const dispatch = createEventDispatcher();
 	const submitFormHandler = function() {
-		console.log(currPokemonPool);
 		// pass the form value
 		dispatch('form-submit', formState);
 	}
@@ -48,7 +53,7 @@
 		<Dropdown enableAny={true} options={genOptions} label="Pick Generation" on:selected={selectGenerationHandler}/>
 
 		{#if !useRandomPokemon}
-			<Dropdown label="Pick Pokemon"/>
+			<Dropdown options={currPokemonPool} label="Pick Pokemon" on:selected={selectPokemonHandler}/>
 		{/if}
 
 	</div>
