@@ -4,6 +4,7 @@
 	import Button from './Button.svelte';
 	import Dropdown from './Dropdown.svelte';
 	import Checkbox from './Checkbox.svelte';
+	import Input from './Input.svelte';
 	import { GENERATION_OPTIONS } from '../constants/form.constants';
 	
 	const genOptions = GENERATION_OPTIONS;
@@ -11,6 +12,8 @@
 	export let allPokemon;
 
 	let useRandomPokemon = true;
+	// TODO: validate that height > 0
+	let userHeight = null;
 	let selectedGeneration = 0;
 	let selectedPokemonId = null;
 	let currPokemonPool = allPokemon;
@@ -49,6 +52,7 @@
 
 <div class="form-container">
 	<div class="filters">
+		<Input value={userHeight} placeholder="Height" />
 		<Checkbox label="Use Random Pokemon" checked={useRandomPokemon} onClickHandler={clickCheckboxHandler}/>
 		<Dropdown enableAny={true} options={genOptions} label="Pick Generation" on:selected={selectGenerationHandler}/>
 
