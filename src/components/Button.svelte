@@ -6,10 +6,7 @@
 	};
 </script>
 
-<div class="button-wrapper">
-	<button on:click={onClickHandler}>{buttonText}</button>
-</div>
+<button on:click={onClickHandler}>{buttonText}</button>
 
 <style>
-
 </style>
