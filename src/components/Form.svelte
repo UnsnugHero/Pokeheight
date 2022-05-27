@@ -16,6 +16,10 @@
 
 	$: formState = {useRandomPokemon, selectedGeneration, selectedPokemon}
 
+	const clickCheckboxHandler = function() {
+		useRandomPokemon = !useRandomPokemon;
+	}
+
 	const selectGenerationHandler = function({ detail }) {
 		if(selectedGeneration !== detail) {
 			selectedGeneration = detail;
@@ -25,14 +29,19 @@
 	const dispatch = createEventDispatcher();
 	const submitFormHandler = function() {
 		// pass the form value
-		dispatch('form-submit', {})
+		dispatch('form-submit', formState);
 	}
 </script>
 
 <div class="form-container">
 	<div class="filters">
-		<Checkbox label="Use Random Pokemon" />
+		<Checkbox label="Use Random Pokemon" checked={useRandomPokemon} onClickHandler={clickCheckboxHandler}/>
 		<Dropdown enableAny={true} options={genOptions} label="Pick Generation" on:selected={selectGenerationHandler}/>
+
+		{#if !useRandomPokemon}
+			<Dropdown label="Pick Pokemon"/>
+		{/if}
+
 	</div>
 	<div class="footer">
 		<Button buttonText='Go!' onClickHandler={submitFormHandler} />
@@ -45,5 +54,10 @@
 		flex-direction: column;
 		justify-content: center;
 		max-width: 480px;
+	}
+
+	.filters {
+		display: flex;
+		flex-direction: column;
 	}
 </style>

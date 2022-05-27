@@ -26,7 +26,7 @@
 		{:else if error}
 			<span>An error occurred! Try reloading.</span>
 		{:else}
-			<Form />
+			<Form on:form-submit={(ev) => console.log(ev)}/>
 		{/if}
 </main>
 
