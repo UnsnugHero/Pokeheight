@@ -13,6 +13,7 @@
 	let useRandomPokemon = true;
 	let selectedGeneration = 0;
 	let selectedPokemon = null;
+	let currPokemonPool = allPokemon;
 
 	$: formState = {useRandomPokemon, selectedGeneration, selectedPokemon}
 
@@ -23,11 +24,19 @@
 	const selectGenerationHandler = function({ detail }) {
 		if(selectedGeneration !== detail) {
 			selectedGeneration = detail;
+
+			if(detail === 0) {
+				currPokemonPool = allPokemon;
+			} else {
+				currPokemonPool = allPokemon.filter(pkmn => pkmn.generation === detail);
+			}
 		}
+		console.log(currPokemonPool);
 	}
 
 	const dispatch = createEventDispatcher();
 	const submitFormHandler = function() {
+		console.log(currPokemonPool);
 		// pass the form value
 		dispatch('form-submit', formState);
 	}
