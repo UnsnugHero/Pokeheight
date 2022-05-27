@@ -8,8 +8,18 @@
 	
 	const genOptions = GENERATION_OPTIONS;
 
+	export let allPokemon;
+
+	let useRandomPokemon = true;
+	let selectedGeneration = 0;
+	let selectedPokemon = null;
+
+	$: formState = {useRandomPokemon, selectedGeneration, selectedPokemon}
+
 	const selectGenerationHandler = function({ detail }) {
-		console.log('Generation picked: ', detail);
+		if(selectedGeneration !== detail) {
+			selectedGeneration = detail;
+		}
 	}
 
 	const dispatch = createEventDispatcher();
