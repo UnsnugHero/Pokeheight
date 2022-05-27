@@ -58,7 +58,9 @@
 	{/if}
 
 	{#if selectedPokemon && !error}
-		<div>show the heights!!!</div>
+		<p>{selectedPokemon.name}</p>
+		<p>{selectedPokemon.height}</p>
+		<img src={selectedPokemon.sprite} alt="selected pokemon" />
 	{/if}
 </main>
 

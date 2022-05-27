@@ -36,6 +36,29 @@ export function getAllSupportedPokemon() {
 }
 
 /**
+ * Gets a single Pokemon by its id (its Pokedex index)
+ * @param {number} id
+ * @returns {Promise<Pokemon>}
+ */
+export function getPokemonById(id) {
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  return axios.get(url).then(({ data }) => {
+    const { name, height, sprites } = data;
+    const { front_default } = sprites;
+
+    axios.get(front_default).then(console.log);
+
+    return {
+      name,
+      height,
+      sprite: front_default,
+    };
+  });
+}
+
+// HELPERS
+
+/**
  * Converts a Pokemon's pokedex index to a three digit string value prepended with zeros when needed
  * @param {number} index
  */
@@ -84,10 +107,3 @@ function getGeneration(pokeIndex) {
 
   return generation;
 }
-
-/**
- * Gets a single Pokemon by its id (its Pokedex index)
- * @param {number} id
- * @returns {Promise<Pokemon>}
- */
-export function getPokemonById(id) {}
