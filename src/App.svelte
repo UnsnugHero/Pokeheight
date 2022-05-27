@@ -8,6 +8,8 @@
 	let loading = true;
 	let error = false;
 
+	let selectedPokemon = null;
+
 	PokemonService.getAllSupportedPokemon()
 		.then((res) => (pokemon = res))
 		.catch((err) => {
@@ -16,8 +18,30 @@
 		})
 		.finally(() => (loading = false));
 
-	const onFormSubmit = function() {
+	const getRandomPokemonIndex = function(generation) {
+		let pokePool = pokemon;
+
+		if(generation !== 0) {
+			pokePool = pokemon.filter(pkmn => pkmn.generation === generation);
+		}
+
+		return pokePool[Math.floor(Math.random()*pokePool.length)].id;
+	}
+
+	const onFormSubmit = function({ detail }) {
+		const { useRandomPokemon, selectedGeneration, selectedPokemonId } = detail;
+		let indexToGet = selectedPokemonId;
 		
+		if(useRandomPokemon) {
+			indexToGet = getRandomPokemonIndex(selectedGeneration);
+		}
+		
+		PokemonService.getPokemonById(indexToGet)
+			.then(pokemon => selectedPokemon = pokemon)
+			.catch(err => {
+				console.error(err);
+				error = true;
+			})
 	}
 </script>
 
@@ -26,12 +50,16 @@
     <span class="title-first">Poké</span><span class="title-second">Height</span>
   </h1>
 	{#if loading}
-			<Loader />
-		{:else if error}
-			<span>An error occurred! Try reloading.</span>
-		{:else}
-			<Form allPokemon={pokemon} on:form-submit={(ev) => console.log(ev)}/>
-		{/if}
+		<Loader />
+	{:else if error}
+		<span>An error occurred! Try reloading.</span>
+	{:else}
+		<Form allPokemon={pokemon} on:form-submit={onFormSubmit}/>
+	{/if}
+
+	{#if selectedPokemon && !error}
+		<div>show the heights!!!</div>
+	{/if}
 </main>
 
 <style>

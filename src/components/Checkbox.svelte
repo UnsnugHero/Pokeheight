@@ -4,7 +4,19 @@
 	export let onClickHandler = function() { console.log('On click unimplemented!') }
 </script>
 
-<div>
+<div class="checkbox-container">
+	<input class="checkbox" type="checkbox" name="checkbox" on:click={onClickHandler} {checked}>
 	<label for="checkbox">{label}</label>
-	<input type="checkbox" name="checkbox" on:click={onClickHandler} {checked}>
 </div>
+
+<style>
+	.checkbox-container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.checkbox {
+		margin-bottom: 0;
+	}
+</style>
