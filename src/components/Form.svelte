@@ -12,59 +12,47 @@
 	export let allPokemon;
 
 	let useRandomPokemon = true;
-	// TODO: validate that height > 0
-	let userHeight = null;
+	let userHeight = 1;
 	let selectedGeneration = 0;
-	let selectedPokemonId = null;
+	let selectedPokemonId = 1;
 	let currPokemonPool = allPokemon;
 
-	$: formState = {useRandomPokemon, selectedGeneration, selectedPokemonId: selectedPokemonId}
-
-	const clickCheckboxHandler = function() {
-		// if Random Pokemon toggle is unselected, then the selectedPokemon needs to be cleared (and set if its set)
-		useRandomPokemon = !useRandomPokemon;
-
-		if(useRandomPokemon) {
-			selectedPokemonId = null;
-		} 
+	$: formState = {
+		useRandomPokemon, 
+		selectedGeneration, 
+		selectedPokemonId: selectedPokemonId, 
+		height: userHeight
 	}
 
-	const selectGenerationHandler = function({ detail }) {
-		if(selectedGeneration !== detail) {
-			selectedGeneration = detail;
-
-			if(detail === 0) {
-				currPokemonPool = allPokemon;
-			} else {
-				currPokemonPool = allPokemon.filter(pkmn => pkmn.generation === detail);
-			}
-		}
+	$: if(selectedGeneration === 0) {
+		currPokemonPool = allPokemon;
 	}
-
-	const selectPokemonHandler = ({ detail }) => selectedPokemonId = detail
+	else {
+		currPokemonPool = allPokemon.filter(pkmn => pkmn.generation === selectedGeneration);
+	}
 
 	const dispatch = createEventDispatcher();
 	const submitFormHandler = function() {
-		// pass the form value
+		if(!userHeight) return;
 		dispatch('form-submit', formState);
 	}
 </script>
 
-<div class="form-container">
+<form on:submit={(e) => e.preventDefault()} class="form-container">
 	<div class="filters">
-		<Input value={userHeight} placeholder="Height" />
-		<Checkbox label="Use Random Pokemon" checked={useRandomPokemon} onClickHandler={clickCheckboxHandler}/>
-		<Dropdown enableAny={true} options={genOptions} label="Pick Generation" on:selected={selectGenerationHandler}/>
+		<Input bind:value={userHeight} label="Height" />
+		<Checkbox label="Use Random Pokemon" bind:checked={useRandomPokemon} />
+		<Dropdown enableAny={true} options={genOptions} label="Pick Generation" bind:value={selectedGeneration}/>
 
 		{#if !useRandomPokemon}
-			<Dropdown options={currPokemonPool} label="Pick Pokemon" on:selected={selectPokemonHandler}/>
+			<Dropdown options={currPokemonPool} label="Pick Pokemon" bind:value={selectedPokemonId} />
 		{/if}
 
 	</div>
 	<div class="footer">
 		<Button buttonText='Go!' onClickHandler={submitFormHandler} />
 	</div>
-</div>
+</form>
 
 <style>
 	.form-container {

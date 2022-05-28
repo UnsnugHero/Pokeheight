@@ -1,11 +1,10 @@
 <script>
 	export let label = 'label';
 	export let checked;
-	export let onClickHandler = function() { console.log('On click unimplemented!') }
 </script>
 
 <div class="checkbox-container">
-	<input class="checkbox" type="checkbox" name="checkbox" on:click={onClickHandler} {checked}>
+	<input class="checkbox" type="checkbox" name="checkbox" bind:checked>
 	<label for="checkbox">{label}</label>
 </div>
 

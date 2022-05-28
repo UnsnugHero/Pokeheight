@@ -1,6 +1,9 @@
 <script>
 	export let value;
-	export let placeholder;
+	export let label;
 </script>
 
-<input bind:value type="number" min={12} max={120} {placeholder}>
+<div class="input-container">
+	<label for="input">{label}</label>
+	<input type="number" min={1} max={120} required bind:value>
+</div>

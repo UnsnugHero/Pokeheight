@@ -46,8 +46,6 @@ export function getPokemonById(id) {
     const { name, height, sprites } = data;
     const { front_default } = sprites;
 
-    axios.get(front_default).then(console.log);
-
     return {
       name,
       height,
