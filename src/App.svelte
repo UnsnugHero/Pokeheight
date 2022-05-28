@@ -1,12 +1,14 @@
 <script>
   import Loader from './components/Loader.svelte';
   import Form from './components/Form.svelte';
+	import Results from './components/Results.svelte';
 	import * as PokemonService from './pokemon-service';
 
 	// get pokemon on load and set loading to false when retrieved
 	let pokemon = null;
 	let loading = true;
 	let error = false;
+	let height = null;
 
 	let selectedPokemon = null;
 
@@ -29,13 +31,14 @@
 	}
 
 	const onFormSubmit = function({ detail }) {
-		const { useRandomPokemon, selectedGeneration, selectedPokemonId } = detail;
+		const { height, useRandomPokemon, selectedGeneration, selectedPokemonId } = detail;
 		let indexToGet = selectedPokemonId;
 		
 		if(useRandomPokemon) {
 			indexToGet = getRandomPokemonIndex(selectedGeneration);
 		}
 		
+		height = height;
 		PokemonService.getPokemonById(indexToGet)
 			.then(pokemon => selectedPokemon = pokemon)
 			.catch(err => {
@@ -57,10 +60,8 @@
 		<Form allPokemon={pokemon} on:form-submit={onFormSubmit}/>
 	{/if}
 
-	{#if selectedPokemon && !error}
-		<p>{selectedPokemon.name}</p>
-		<p>{selectedPokemon.height}</p>
-		<img src={selectedPokemon.sprite} alt="selected pokemon" />
+	{#if selectedPokemon && height && !error}
+		<Results {height} pokemon={selectedPokemon} />
 	{/if}
 </main>
 
