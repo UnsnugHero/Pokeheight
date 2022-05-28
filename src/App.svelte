@@ -8,6 +8,7 @@
 	let pokemon = null;
 	let loading = true;
 	let error = false;
+	let isFormError = false;
 	let trainerHeight = null;
 
 	let selectedPokemon = null;
@@ -31,7 +32,10 @@
 	}
 
 	const onFormSubmit = function({ detail }) {
-		const { height, useRandomPokemon, selectedGeneration, selectedPokemonId } = detail;
+		const { height, useRandomPokemon, selectedGeneration, selectedPokemonId, formError } = detail;
+		isFormError = formError;
+		if(formError) return;
+
 		let indexToGet = selectedPokemonId;
 		
 		if(useRandomPokemon) {
@@ -60,7 +64,7 @@
 		<Form allPokemon={pokemon} on:form-submit={onFormSubmit}/>
 	{/if}
 
-	{#if selectedPokemon && trainerHeight && !error}
+	{#if selectedPokemon && trainerHeight && !isFormError && !error}
 		<Results {trainerHeight} pokemon={selectedPokemon} />
 	{/if}
 </main>

@@ -12,16 +12,19 @@
 	export let allPokemon;
 
 	let useRandomPokemon = true;
-	let userHeight = 1;
+	let userHeight = 12;
 	let selectedGeneration = 0;
 	let selectedPokemonId = 1;
 	let currPokemonPool = allPokemon;
+
+	$: formError = !userHeight || userHeight < 12 || userHeight > 120;
 
 	$: formState = {
 		useRandomPokemon, 
 		selectedGeneration, 
 		selectedPokemonId: selectedPokemonId, 
-		height: userHeight
+		height: userHeight,
+		formError
 	}
 
 	$: if(selectedGeneration === 0) {
@@ -33,7 +36,6 @@
 
 	const dispatch = createEventDispatcher();
 	const submitFormHandler = function() {
-		if(!userHeight) return;
 		dispatch('form-submit', formState);
 	}
 </script>
@@ -50,7 +52,7 @@
 
 	</div>
 	<div class="footer">
-		<Button buttonText='Go!' onClickHandler={submitFormHandler} />
+		<Button buttonText='Go!' type="submit" onClickHandler={submitFormHandler} />
 	</div>
 </form>
 
