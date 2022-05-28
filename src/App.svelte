@@ -8,7 +8,7 @@
 	let pokemon = null;
 	let loading = true;
 	let error = false;
-	let height = null;
+	let trainerHeight = null;
 
 	let selectedPokemon = null;
 
@@ -38,7 +38,7 @@
 			indexToGet = getRandomPokemonIndex(selectedGeneration);
 		}
 		
-		height = height;
+		trainerHeight = height;
 		PokemonService.getPokemonById(indexToGet)
 			.then(pokemon => selectedPokemon = pokemon)
 			.catch(err => {
@@ -60,8 +60,8 @@
 		<Form allPokemon={pokemon} on:form-submit={onFormSubmit}/>
 	{/if}
 
-	{#if selectedPokemon && height && !error}
-		<Results {height} pokemon={selectedPokemon} />
+	{#if selectedPokemon && trainerHeight && !error}
+		<Results {trainerHeight} pokemon={selectedPokemon} />
 	{/if}
 </main>
 

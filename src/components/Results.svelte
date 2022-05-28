@@ -2,13 +2,13 @@
 	import TrainerResult from './TrainerResult.svelte';
 	import PokemonResult from './PokemonResult.svelte';
 
-	export let height;
+	export let trainerHeight;
 	export let pokemon;
 </script>
 
 <div class="results-container">
 	<TrainerResult />
-	<PokemonResult />
+	<PokemonResult {trainerHeight} {pokemon}/>
 </div>
 
 <style>

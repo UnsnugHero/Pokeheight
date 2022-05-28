@@ -45,10 +45,12 @@ export function getPokemonById(id) {
   return axios.get(url).then(({ data }) => {
     const { name, height, sprites } = data;
     const { front_default } = sprites;
+    // height is in decimeters, convert to inches
+    const convertedHeight = Math.trunc(height * 3.937);
 
     return {
       name,
-      height,
+      height: convertedHeight,
       sprite: front_default,
     };
   });
