@@ -25,13 +25,16 @@
 			<img src={sprite} alt="poke-height" />
 		{/each}
 	</div>
-	<span>Your height in {pokemon.name}'s</span>
+	<p>Your height in {pokemon.name}'s</p>
 </div>
 
 <style>
 	.pokemon-result-container {
 		display: flex;
 		flex-direction: column;
+		justify-content: flex-end;
+		align-items: center;
+		min-width: 50%;
 	}
 
 	.pokemon-stacked {

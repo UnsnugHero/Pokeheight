@@ -15,5 +15,7 @@
 	.results-container {
 		display:flex;
 		flex-direction: row;
+		min-width: 50%;
+		justify-content: space-evenly;
 	}
 </style>
