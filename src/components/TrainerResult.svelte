@@ -13,7 +13,7 @@
 		flex-direction: column;
 		justify-content: flex-end;
 		align-items: center;
-		min-width: 300px;
+		min-width: 25%;
 		min-height: 200px;
 	}
 

@@ -8,15 +8,12 @@
 		let numPokemon = trainerHeight / pkmnHeight;
 		const imgArray = [];
 
-		console.log('pokemon height to trainer height ratio: ', pokemon.height / trainerHeight);
-		console.log('pokemon to render: ', numPokemon)
 		if((pokemon.height / trainerHeight) < (2 / 3)) {
 			numPokemon = Math.ceil(numPokemon);
 		}
 		else {
 			numPokemon = Math.floor(numPokemon);
 		}
-		console.log('res: ', numPokemon);
 
 		for(let i = 0; i < numPokemon; i++){
 			imgArray.push(pokemon.sprite);
@@ -53,7 +50,7 @@
 		flex-direction: column;
 		justify-content: flex-end;
 		align-items: center;
-		min-width: 50%;
+		min-width: 25%;
 	}
 
 	.pokemon-stacked, .tall-pokemon-img-container {
