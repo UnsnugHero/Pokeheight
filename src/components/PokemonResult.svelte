@@ -58,8 +58,4 @@
 	.pokemon-img {
 		width: var(--poke-width);
 	}
-
-	.pokemon-img:not(:last-child) {
-		margin-bottom: -40px;
-	}
 </style>
