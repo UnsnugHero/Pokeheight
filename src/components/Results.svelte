@@ -4,6 +4,9 @@
 
 	export let trainerHeight;
 	export let pokemon;
+
+	$: console.log(trainerHeight);
+	$: console.log(pokemon.height);
 </script>
 
 <div class="results-container">

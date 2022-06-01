@@ -2,27 +2,38 @@
 	export let trainerHeight;
 	export let pokemon;
 
+	let modPokeHeight = 190;
+
 	const getPokemonFitToTrainerHeight = function(pkmnHeight, trainerHeight) {
 		let numPokemon = trainerHeight / pkmnHeight;
 		const imgArray = [];
 
-		while(numPokemon > 1) {
-			imgArray.push(pokemon.sprite);
-			numPokemon -= 1;
+		console.log('pokemon height to trainer height ratio: ', pokemon.height / trainerHeight);
+		console.log('pokemon to render: ', numPokemon)
+		if((pokemon.height / trainerHeight) < (2 / 3)) {
+			numPokemon = Math.ceil(numPokemon);
 		}
-		const pokeLeft = numPokemon;
+		else {
+			numPokemon = Math.floor(numPokemon);
+		}
+		console.log('res: ', numPokemon);
 
-		return { imgArray, pokeLeft }
+		for(let i = 0; i < numPokemon; i++){
+			imgArray.push(pokemon.sprite);
+		}
+
+		return imgArray;
 	}
 
+	$: modPokeHeight = 190 * (pokemon.height / (trainerHeight * 0.75));
 	$: pokeFitToTrainerHeight = getPokemonFitToTrainerHeight(pokemon.height, trainerHeight);
 
 </script>
 
 <div class="pokemon-result-container">
 	<div class="pokemon-stacked">
-		{#each pokeFitToTrainerHeight.imgArray as sprite}
-			<img src={sprite} alt="poke-height" />
+		{#each pokeFitToTrainerHeight as sprite}
+			<img class="pokemon-img" src={sprite} alt="poke-height" style="--poke-width: {modPokeHeight}px" />
 		{/each}
 	</div>
 	<p>Your height in {pokemon.name}'s</p>
@@ -40,5 +51,15 @@
 	.pokemon-stacked {
 		display: flex;
 		flex-direction: column;
+		margin-bottom: 45px;
+		position: absolute;
+	}
+
+	.pokemon-img {
+		width: var(--poke-width);
+	}
+
+	.pokemon-img:not(:last-child) {
+		margin-bottom: -40px;
 	}
 </style>
