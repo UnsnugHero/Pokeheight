@@ -31,12 +31,20 @@
 </script>
 
 <div class="pokemon-result-container">
-	<div class="pokemon-stacked">
-		{#each pokeFitToTrainerHeight as sprite}
-			<img class="pokemon-img" src={sprite} alt="poke-height" style="--poke-width: {modPokeHeight}px" />
-		{/each}
-	</div>
-	<p>Your height in {pokemon.name}'s</p>
+	{#if trainerHeight > pokemon.height}
+		<div class="pokemon-stacked">
+			{#each pokeFitToTrainerHeight as sprite}
+				<img class="pokemon-img" src={sprite} alt="poke-height" style="--poke-width: {modPokeHeight}px" />
+			{/each}
+		</div>
+		<p>Your height in {pokemon.name}'s</p>
+	{:else}
+		<div class="tall-pokemon-img-container">
+			<img class="tall-pokemon-img" src={pokemon.sprite} alt="big pokemon" style="--poke-width: {modPokeHeight}px" />
+			<div class="cover"></div>
+		</div>
+		<p>{pokemon.name} is taller than you!</p>
+	{/if}
 </div>
 
 <style>
@@ -48,14 +56,19 @@
 		min-width: 50%;
 	}
 
-	.pokemon-stacked {
+	.pokemon-stacked, .tall-pokemon-img-container {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 45px;
 		position: absolute;
+		z-index: -1;
 	}
 
-	.pokemon-img {
+	.pokemon-img, .tall-pokemon-img {
 		width: var(--poke-width);
+		pointer-events: none;
+	}
+
+	.pokemon-stacked {
+		margin-bottom: 45px;
 	}
 </style>

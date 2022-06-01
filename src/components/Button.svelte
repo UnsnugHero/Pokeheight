@@ -10,4 +10,7 @@
 <button {type} on:click={onClickHandler}>{buttonText}</button>
 
 <style>
+	button {
+		z-index: 999;
+	}
 </style>

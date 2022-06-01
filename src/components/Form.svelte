@@ -42,12 +42,12 @@
 
 <form on:submit={(e) => e.preventDefault()} class="form-container">
 	<div class="filters">
-		<Input bind:value={userHeight} label="Height (in)" />
-		<Checkbox label="Use Random Pokemon" bind:checked={useRandomPokemon} />
-		<Dropdown enableAny={true} options={genOptions} label="Pick Generation" bind:value={selectedGeneration}/>
+		<Input class="filter" bind:value={userHeight} label="Height (in)" />
+		<Checkbox class="filter" label="Use Random Pokemon" bind:checked={useRandomPokemon} />
+		<Dropdown class="filter" enableAny={true} options={genOptions} label="Pick Generation" bind:value={selectedGeneration}/>
 
 		{#if !useRandomPokemon}
-			<Dropdown options={currPokemonPool} label="Pick Pokemon" bind:value={selectedPokemonId} />
+			<Dropdown class="filter" options={currPokemonPool} label="Pick Pokemon" bind:value={selectedPokemonId} />
 		{/if}
 
 	</div>

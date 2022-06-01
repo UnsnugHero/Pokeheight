@@ -18,4 +18,7 @@
 </div>
 
 <style>
+	.dropdown-container {
+		margin-bottom: 15px;
+	}
 </style>
