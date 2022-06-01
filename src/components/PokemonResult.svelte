@@ -68,4 +68,8 @@
 	.pokemon-stacked {
 		margin-bottom: 45px;
 	}
+
+	p {
+		white-space: nowrap;
+	}
 </style>

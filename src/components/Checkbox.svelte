@@ -18,5 +18,6 @@
 
 	.checkbox {
 		margin-bottom: 0;
+		margin-right: 5px;
 	}
 </style>
